@@ -2232,10 +2232,21 @@ MainForm.OnProcessOpened=function()
   if UEInfoScannerThread then
     UEInfoScannerThread.Terminate()
   end
+  
+  createThread(function()
+    waitForExports()
+    if couldBeUnrealEngine() then
+      LaunchUEInfoScanner()
+    else
+      if getProcessAge and getProcessAge()<30000 then --newly created
+        sleep(30000) --wait for the game to load
+        if couldBeUnrealEngine() then
+          LaunchUEInfoScanner()
+        end
+      end
+    end    
+  end)
 
-  if couldBeUnrealEngine() then
-    LaunchUEInfoScanner()
-  end
   local r=oldOnProcessOpened()
 end
 
