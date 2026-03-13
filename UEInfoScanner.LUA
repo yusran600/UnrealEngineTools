@@ -2228,7 +2228,8 @@ end
 
 local oldOnProcessOpened=MainForm.OnProcessOpened
 
-MainForm.OnProcessOpened=function()
+MainForm.OnProcessOpened=function(...)
+  
   if UEInfoScannerThread then
     UEInfoScannerThread.Terminate()
   end
@@ -2247,7 +2248,7 @@ MainForm.OnProcessOpened=function()
     end    
   end)
 
-  local r=oldOnProcessOpened()
+  local r=oldOnProcessOpened(...)
 end
 
 
