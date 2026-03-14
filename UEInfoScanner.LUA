@@ -1755,8 +1755,14 @@ function UEInfoScanner(t)
   --can be called directly or with a thread
 
   log('UEInfoScanner start');
+  
+  local versionid=md5memory(getAddressSafe(process),4096)
+  
+  if versionid==nil then
+    return log('main module unreadable')
+  end
 
-  local id=process..'-'..md5memory(getAddressSafe(process),4096)
+  local id=process..'-'..versionid
 
   local s=getSettings("UEInfo\\"..id,true)
   local r
