@@ -804,7 +804,7 @@ function FindGEngine(t)
     UEngine.GEngine=r[1]
     unregisterSymbol('GEngine')
     local n=getNameFromAddress(UEngine.GEngine,true,false,false)
-    if n:find(extractFileNameWithoutExt(process)) then    
+    if n:find(extractFileNameWithoutExt(process),nil,true) then    
       registerSymbol('GEngine',getNameFromAddress(UEngine.GEngine), true)
     end
   end
@@ -1836,7 +1836,7 @@ function UEInfoScanner(t)
     
     if UEngine.GEngine then
       local n=getNameFromAddress(UEngine.GEngine,true,false,false)
-      if n:find(extractFileNameWithoutExt(process)) then
+      if n:find(extractFileNameWithoutExt(process),nil,true) then
         registerSymbol('GEngine',getNameFromAddress(UEngine.GEngine), true)
       end
     end
@@ -1895,7 +1895,7 @@ function UEInfoScanner(t)
       end
 
       local n=getNameFromAddress(UEngine.NamePoolData,true,false,false)
-      if n:find(extractFileNameWithoutExt(process)) then
+      if n:find(extractFileNameWithoutExt(process),nil,true) then
         --it's a module address. Save it
         s.NamePoolData=getNameFromAddress(UEngine.NamePoolData)
       end
